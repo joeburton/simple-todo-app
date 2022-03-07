@@ -1,0 +1,23 @@
+.todosList {
+  list-style: none;
+  padding: 0;
+}
+
+.todosList li {
+  display: flex;
+  font-size: 1rem;
+  margin: 4px 0 12px 0;
+  line-height: 20px;
+  font-weight: 200;
+}
+
+.todosList li .text {
+  display: flex;
+  cursor: pointer;
+  color: black;
+  width: 100%;
+}
+
+.todosList li .text svg {
+  margin: 0 4px 0 0;
+}

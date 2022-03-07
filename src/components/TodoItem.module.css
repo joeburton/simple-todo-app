@@ -1,0 +1,28 @@
+.strikethrough {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.statusActive {
+  color: black;
+}
+
+.statusComplete {
+  color: grey;
+}
+
+.deleteIcon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.deleteIcon:hover {
+  color: red;
+}
+
+.text {
+  display: flex;
+  cursor: pointer;
+  color: black;
+  width: 100%;
+}
