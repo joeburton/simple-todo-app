@@ -8,6 +8,7 @@ const ADD_TODO = gql`
     $date: Date
   ) {
     addTodo(title: $title, detail: $detail, complete: $complete, date: $date) {
+      id
       title
       detail
       complete

@@ -3,39 +3,13 @@ import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
 import { useMutation } from '@apollo/client';
 
 import { UPDATE_TODO, DELETE_TODO } from '../apollo/mutations';
-import { GET_TODOS } from '../apollo/queries';
 import Todo from './TodoInterface';
+import { updateCache } from '../apollo/updateCache';
 import styles from './TodoItem.module.css';
 
 interface TodoItemProps {
   todo: Todo;
 }
-
-type Action = 'TOGGLE' | 'DELETE';
-
-const updateCache = (todo: Todo, action: Action) => {
-  return (cache: any) => {
-    let { getTodos } = cache.readQuery({ query: GET_TODOS });
-    let updatedTodos;
-
-    if (action === 'DELETE') {
-      updatedTodos = getTodos?.filter((item: Todo) => item.id !== todo.id);
-    }
-
-    if (action === 'TOGGLE') {
-      updatedTodos = getTodos?.map((item: Todo) =>
-        item.id === todo.id ? { ...item, complete: !item.complete } : item
-      );
-    }
-
-    cache.writeQuery({
-      query: GET_TODOS,
-      data: {
-        getTodos: updatedTodos,
-      },
-    });
-  };
-};
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const [updateTodo] = useMutation(UPDATE_TODO, {
