@@ -13,7 +13,7 @@ const GET_TODOS = gql`
 `;
 
 const GET_TODO = gql`
-  query GetTodo($id: String) {
+  query GetTodo($id: ID) {
     getTodo(id: $id) {
       id
       title

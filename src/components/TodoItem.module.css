@@ -26,3 +26,7 @@
   color: black;
   width: 100%;
 }
+
+svg {
+  margin: 0 4px 0 0;
+}
