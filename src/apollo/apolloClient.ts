@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const cache = new InMemoryCache({
+export const cache = new InMemoryCache({
   addTypename: false,
   typePolicies: {
     Query: {

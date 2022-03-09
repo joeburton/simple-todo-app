@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { UPDATE_TODO, DELETE_TODO } from '../apollo/mutations';
 import Todo from './TodoInterface';
-import { updateCache } from '../apollo/updateCache';
+import { updateCache, ACTIONS } from '../apollo/updateCache';
 import styles from './TodoItem.module.css';
 
 interface TodoItemProps {
@@ -13,11 +13,11 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const [updateTodo] = useMutation(UPDATE_TODO, {
-    update: updateCache(todo, 'TOGGLE'),
+    update: updateCache(ACTIONS.TOGGLE, todo),
   });
 
   const [deleteTodo] = useMutation(DELETE_TODO, {
-    update: updateCache(todo, 'DELETE'),
+    update: updateCache(ACTIONS.DELETE, todo),
   });
 
   const removeTodo = (e: React.MouseEvent<SVGElement>) => {

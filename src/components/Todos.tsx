@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import Button from '@mui/material/Button';
 import { useMutation } from '@apollo/client';
 
@@ -7,16 +7,17 @@ import Todo from './TodoInterface';
 
 import styles from './Todos.module.css';
 import { ADD_TODO } from '../apollo/mutations';
-import { updateCache } from '../apollo/updateCache';
+import { updateCache, ACTIONS } from '../apollo/updateCache';
 
 const Todos = () => {
-  const [addTodo] = useMutation(ADD_TODO);
+  const [addTodo] = useMutation(ADD_TODO, {
+    update: updateCache(ACTIONS.UPDATE_TODOS),
+  });
 
   const newTodoRef = useRef<HTMLInputElement>(null);
 
-  const addNewTodo = useCallback(() => {
+  const addNewTodo = async () => {
     const todo = {
-      id: 'temp',
       title: newTodoRef?.current?.value,
       detail: '',
       date: new Date(),
@@ -26,10 +27,9 @@ const Todos = () => {
     if (newTodoRef.current) {
       addTodo({
         variables: todo,
-        update: updateCache(todo, 'ADD_TODO'),
       });
     }
-  }, []);
+  };
 
   return (
     <>
