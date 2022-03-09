@@ -11,7 +11,7 @@ import { updateCache, ACTIONS } from '../apollo/updateCache';
 
 const Todos = () => {
   const [addTodo] = useMutation(ADD_TODO, {
-    update: updateCache(ACTIONS.UPDATE_TODOS),
+    update: updateCache(ACTIONS.ADD_NEW_TODO),
   });
 
   const newTodoRef = useRef<HTMLInputElement>(null);

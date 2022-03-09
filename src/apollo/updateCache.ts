@@ -4,14 +4,11 @@ import { GET_TODOS } from './queries';
 enum ACTIONS {
   TOGGLE,
   DELETE,
-  ADD_TODO,
-  UPDATE_TODOS,
+  ADD_NEW_TODO,
 }
 
 const updateCache = (action: ACTIONS, todo?: Todo) => {
   return (cache: any, response: any) => {
-    console.log(response);
-
     let { getTodos } = cache.readQuery({ query: GET_TODOS });
     let updatedTodos;
 
@@ -25,7 +22,7 @@ const updateCache = (action: ACTIONS, todo?: Todo) => {
       updatedTodos = getTodos?.filter((item: Todo) => item.id !== todo?.id);
     }
 
-    if (action === ACTIONS.UPDATE_TODOS) {
+    if (action === ACTIONS.ADD_NEW_TODO) {
       updatedTodos = [...getTodos, response.data.addTodo];
     }
 
