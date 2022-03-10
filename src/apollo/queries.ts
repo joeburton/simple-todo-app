@@ -4,6 +4,7 @@ const GET_TODOS = gql`
   query GetTodos {
     getTodos {
       id
+      listId
       title
       detail
       complete
@@ -16,6 +17,7 @@ const GET_TODO = gql`
   query GetTodo($id: ID) {
     getTodo(id: $id) {
       id
+      listId
       title
       detail
       complete

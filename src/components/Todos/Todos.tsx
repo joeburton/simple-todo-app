@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import { useMutation, useQuery } from '@apollo/client';
 
@@ -12,6 +12,7 @@ import { updateCache, ACTIONS } from '../../apollo/updateCache';
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
+  const [selectedListId, setSelectedListId] = useState<string>('default');
 
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateCache(ACTIONS.ADD_NEW_TODO),
@@ -45,12 +46,14 @@ const Todos = () => {
       <div className={styles.selectList}>
         <SelectMenu
           options={[
-            { value: 'default', label: 'Select a list' },
-            { value: 'second', label: 'Second item' },
+            { value: 'default', label: 'Select List' },
+            { value: 'general', label: 'General' },
+            { value: 'tech', label: 'Tech' },
           ]}
-          value={'second'}
-          onChange={() => {
-            console.log('lisp');
+          value={selectedListId}
+          onChange={(value) => {
+            console.log('lisp', value);
+            setSelectedListId(value);
           }}
           styles={{ minWidth: '200px', height: '38px' }}
         />
@@ -68,12 +71,16 @@ const Todos = () => {
       </div>
       <h2>Active</h2>
       <TodoList
-        filterFn={(todo: Todo) => todo.complete === false}
+        filterFn={(todo: Todo) =>
+          todo.complete === false && todo.listId === selectedListId
+        }
         todos={data?.getTodos}
       />
       <h2>Complete</h2>
       <TodoList
-        filterFn={(todo: Todo) => todo.complete === true}
+        filterFn={(todo: Todo) =>
+          todo.complete === true && todo.listId === selectedListId
+        }
         todos={data?.getTodos}
       />
     </>
