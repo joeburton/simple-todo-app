@@ -1,4 +1,4 @@
-import Todo from '../components/TodoInterface';
+import { Todo } from '../interfaces';
 import { GET_TODOS } from './queries';
 
 enum ACTIONS {

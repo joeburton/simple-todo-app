@@ -2,9 +2,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
 import { useMutation } from '@apollo/client';
 
-import { UPDATE_TODO, DELETE_TODO } from '../apollo/mutations';
-import Todo from './TodoInterface';
-import { updateCache, ACTIONS } from '../apollo/updateCache';
+import { UPDATE_TODO, DELETE_TODO } from '../../apollo/mutations';
+import { Todo } from '../../interfaces';
+import { updateCache, ACTIONS } from '../../apollo/updateCache';
 import styles from './TodoItem.module.css';
 
 interface TodoItemProps {
