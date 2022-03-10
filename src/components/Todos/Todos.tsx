@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Button from '@mui/material/Button';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { TodoList } from '../';
+import { TodoList, SelectMenu } from '../';
 import { Todo } from '../../interfaces';
 
 import styles from './Todos.module.css';
@@ -42,6 +42,19 @@ const Todos = () => {
 
   return (
     <>
+      <div className={styles.selectList}>
+        <SelectMenu
+          options={[
+            { value: 'default', label: 'Select a list' },
+            { value: 'second', label: 'Second item' },
+          ]}
+          value={'second'}
+          onChange={() => {
+            console.log('lisp');
+          }}
+          styles={{ minWidth: '200px', height: '38px' }}
+        />
+      </div>
       <div className={styles.addTodo}>
         <input ref={newTodoRef} className={styles.todo} />
         <Button
