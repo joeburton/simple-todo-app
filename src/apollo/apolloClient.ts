@@ -17,7 +17,7 @@ export const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://apollo-3-mongoose-integration.vercel.app/graphql',
   cache: cache,
 });
 
