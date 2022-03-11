@@ -25,6 +25,7 @@ const Todos = () => {
     if (newTodoRef?.current?.value) {
       const todo = {
         title: newTodoRef?.current?.value,
+        listId: selectedListId,
         detail: '',
         date: new Date(),
         complete: false,
