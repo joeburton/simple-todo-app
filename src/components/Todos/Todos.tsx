@@ -20,7 +20,8 @@ const Todos = () => {
 
   const newTodoRef = useRef<HTMLInputElement>(null);
 
-  const addNewTodo = async () => {
+  const addNewTodo = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     if (newTodoRef?.current?.value) {
       const todo = {
         title: newTodoRef?.current?.value,
