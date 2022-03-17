@@ -9,30 +9,35 @@ type Option<T extends OptionValue> = {
 
 type Props<T extends OptionValue> = {
   options: Option<T>[];
-  value: T;
   onChange: (value: T) => void;
-  styles?: React.CSSProperties;
+  customStyles?: React.CSSProperties;
 };
 
-const SelectMenu = <T extends OptionValue>(props: Props<T>) => {
-  function handleOnChange(e: React.FormEvent<HTMLSelectElement>) {
+const SelectMenu = <T extends OptionValue>({
+  options,
+  onChange,
+  customStyles,
+}: Props<T>) => {
+  const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const { selectedIndex } = e.currentTarget;
-    const selectedOption = props.options[selectedIndex];
-    props.onChange(selectedOption.value);
-  }
+    const selectedOption = options[selectedIndex];
+    onChange(selectedOption.value);
+  };
   return (
     <select
-      value={props.value}
       onChange={handleOnChange}
       className={styles.selectMenu}
-      style={props.styles}
+      style={customStyles}
+      data-testid='select-menu'
+      role='combobox'
     >
-      {props.options.map((option) => (
-        <option key={option.value} value={option.value}>
+      {options.map((option) => (
+        <option key={option.value} value={option.value} role='option'>
           {option.label}
         </option>
       ))}
     </select>
   );
 };
+
 export default SelectMenu;

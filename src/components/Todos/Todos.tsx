@@ -20,7 +20,7 @@ const Todos = () => {
 
   const newTodoRef = useRef<HTMLInputElement>(null);
 
-  const addNewTodo = async (e: React.MouseEvent<HTMLElement>) => {
+  const addNewTodo = async (e: React.MouseEvent<HTMLElement | null>) => {
     e.preventDefault();
     if (newTodoRef?.current?.value) {
       const todo = {
@@ -35,6 +35,7 @@ const Todos = () => {
         addTodo({
           variables: todo,
         });
+        newTodoRef.current.value = '';
       }
     }
   };
@@ -48,16 +49,15 @@ const Todos = () => {
       <div className={styles.selectList}>
         <SelectMenu
           options={[
-            { value: 'default', label: 'Select List' },
+            { value: 'default', label: 'Default List' },
             { value: 'general', label: 'General' },
             { value: 'tech', label: 'Tech' },
           ]}
-          value={selectedListId}
           onChange={(value) => {
             console.log('lisp', value);
             setSelectedListId(value);
           }}
-          styles={{ minWidth: '200px', height: '38px' }}
+          customStyles={{ minWidth: '200px', height: '38px' }}
         />
       </div>
       <div className={styles.addTodo}>
