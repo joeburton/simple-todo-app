@@ -17,6 +17,13 @@ export const handlers = [
       })
     );
   }),
+  graphql.mutation(`DeleteTodo`, (_req, res, ctx) => {
+    return res(
+      ctx.data({
+        deleteTodo: 'todo deleted',
+      })
+    );
+  }),
   graphql.query('GetTodos', (_req, res, ctx) => {
     return res(
       ctx.data({

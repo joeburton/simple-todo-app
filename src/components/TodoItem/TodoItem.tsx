@@ -12,7 +12,7 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const [updateTodo, { data, loading, error }] = useMutation(UPDATE_TODO, {
+  const [updateTodo, { loading }] = useMutation(UPDATE_TODO, {
     update: updateCache(ACTIONS.TOGGLE, todo),
   });
 
@@ -44,7 +44,11 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         />
         <span className={styles[complete]}>{todo.title}</span>
       </div>
-      <DeleteOutlineIcon onClick={removeTodo} className={styles.deleteIcon} />
+      <DeleteOutlineIcon
+        data-testid='remove-todo'
+        onClick={removeTodo}
+        className={styles.deleteIcon}
+      />
     </li>
   );
 };
