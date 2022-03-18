@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import SelectMenu from './SelectMenu';
@@ -13,7 +13,7 @@ const renderSelectMenu = () => {
           { value: 'tech', label: 'Tech' },
         ]}
         onChange={(value) => {
-          console.log('onChange', value);
+          // console.log('onChange', value);
         }}
         customStyles={{ minWidth: '200px', height: '38px' }}
       />
@@ -48,7 +48,7 @@ describe('SelectMenu', () => {
       getByRole('option', { name: 'General' })
     );
 
-    const selectMenu = screen.getByRole('option', {
+    const selectMenu = getByRole('option', {
       name: 'General',
     }) as HTMLOptionElement;
 
@@ -66,7 +66,7 @@ describe('SelectMenu', () => {
       getByRole('option', { name: 'Tech' })
     );
 
-    const selectMenu = screen.getByRole('option', {
+    const selectMenu = getByRole('option', {
       name: 'Tech',
     }) as HTMLOptionElement;
     expect(selectMenu.selected).toBe(true);

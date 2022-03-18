@@ -12,7 +12,7 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const [updateTodo] = useMutation(UPDATE_TODO, {
+  const [updateTodo, { data, loading, error }] = useMutation(UPDATE_TODO, {
     update: updateCache(ACTIONS.TOGGLE, todo),
   });
 
@@ -36,7 +36,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const status = todo.complete ? `statusComplete` : `statusActive`;
 
   return (
-    <li>
+    <li data-testid='todo-item' className={loading ? 'loading' : ''}>
       <div className={styles.text} onClick={markComplete}>
         <ModeStandbyIcon
           sx={{ fontSize: '1.2rem' }}

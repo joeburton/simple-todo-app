@@ -7,7 +7,6 @@ export const cache = new InMemoryCache({
       fields: {
         getTodos: {
           merge(_existing, incoming) {
-            console.log(incoming);
             return incoming;
           },
         },
@@ -16,8 +15,20 @@ export const cache = new InMemoryCache({
   },
 });
 
+const env = process.env.NODE_ENV;
+let graph: string = '';
+
+switch (env) {
+  case 'test':
+    graph = 'http://localhost:3000';
+    break;
+  default:
+    graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
+    break;
+}
+
 const client = new ApolloClient({
-  uri: 'https://apollo-3-mongoose-integration.vercel.app/graphql',
+  uri: graph,
   cache: cache,
 });
 

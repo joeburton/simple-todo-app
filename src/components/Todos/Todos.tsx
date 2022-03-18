@@ -29,7 +29,7 @@ const Todos = () => {
         detail: '',
         date: new Date(),
         complete: false,
-      } as Todo;
+      };
 
       if (newTodoRef.current) {
         addTodo({
@@ -40,13 +40,13 @@ const Todos = () => {
     }
   };
 
-  if (loading) return <>Loading...</>;
+  if (loading) return <div data-testid='loading'>Loading...</div>;
 
   if (error) return <>Error...</>;
 
   return (
     <>
-      <div className={styles.selectList}>
+      <div className={styles.selectList} data-testid='todos-container'>
         <SelectMenu
           options={[
             { value: 'default', label: 'Default List' },
