@@ -31,6 +31,8 @@ const Todos = () => {
         complete: false,
       };
 
+      console.log(todo);
+
       if (newTodoRef.current) {
         addTodo({
           variables: todo,
@@ -39,8 +41,6 @@ const Todos = () => {
       }
     }
   };
-
-  console.log(data, loading, error);
 
   if (loading) return <div data-testid='loading'>Loading...</div>;
 
@@ -63,7 +63,11 @@ const Todos = () => {
         />
       </div>
       <div className={styles.addTodo}>
-        <input ref={newTodoRef} className={styles.todo} />
+        <input
+          ref={newTodoRef}
+          className={styles.todo}
+          data-testid='add-todo-input'
+        />
         <Button
           className={styles.add}
           onClick={addNewTodo}

@@ -1,17 +1,48 @@
+import {
+  findAllByTestId,
+  queryAllByTestId,
+  render,
+  waitFor,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { ApolloProvider } from '@apollo/client';
-import { render } from '@testing-library/react';
 import apolloClient from '../../apollo/apolloClient';
+
 import Todos from './Todos';
-describe.skip('Todos', () => {
-  it('should render the Todos App', async () => {
-    const { findByTestId } = render(
+
+describe('TodoItem', () => {
+  it('should render a TodoItem', async () => {
+    const { getByTestId } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
       </ApolloProvider>
     );
 
-    await findByTestId('todos-container');
+    await waitFor(() => expect(getByTestId('todo-item')).toBeInTheDocument());
+  });
 
-    expect(findByTestId('todos-container')).toBeInTheDocument();
+  it('should add a new todo', async () => {
+    const { getByTestId, getByText, queryAllByTestId } = render(
+      <ApolloProvider client={apolloClient}>
+        <Todos />
+      </ApolloProvider>
+    );
+
+    await waitFor(() => expect(getByTestId('todo-item')).toBeInTheDocument());
+
+    const addTodoInput = getByTestId('add-todo-input');
+
+    userEvent.type(addTodoInput, 'my new todo text');
+
+    expect(addTodoInput).toHaveValue('my new todo text');
+
+    userEvent.click(getByText('ADD'));
+
+    await waitFor(() =>
+      expect(queryAllByTestId('todo-item').length).toEqual(2)
+    );
+
+    expect(getByText('new todo')).toBeInTheDocument();
   });
 });

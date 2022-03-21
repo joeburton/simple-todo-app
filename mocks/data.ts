@@ -9,7 +9,7 @@ const todos = [
   },
   {
     id: '6228e38df41cdf8ac72bb1d0',
-    listId: 'general',
+    listId: 'default',
     title: 'My first todo 2',
     detail: 'So much detail',
     complete: false,

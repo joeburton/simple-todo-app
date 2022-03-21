@@ -26,6 +26,20 @@ export const handlers = [
       })
     );
   }),
+  graphql.mutation(`AddTodo`, (_req, res, ctx) => {
+    return res(
+      ctx.data({
+        addTodo: {
+          id: '623899eb1919a658e96f5d83',
+          listId: 'default',
+          title: 'new todo',
+          detail: 'just add a todo',
+          complete: true,
+          date: '1/1/2020',
+        },
+      })
+    );
+  }),
   graphql.query('GetTodos', (_req, res, ctx) => {
     return res(
       ctx.data({
