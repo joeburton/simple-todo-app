@@ -1,13 +1,12 @@
-import { getByTestId, render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../../apollo/apolloClient';
+import todos from '../../../mocks/data';
 
 import TodoItem from './TodoItem';
 import { Todos } from '../index';
-import userEvent from '@testing-library/user-event';
-
-import todos from '../../../mocks/data';
 
 describe('TodoItem', () => {
   it('should render a TodoItem', () => {
@@ -21,7 +20,7 @@ describe('TodoItem', () => {
     expect(todoItem).toBeDefined();
   });
 
-  it('should toggle the Todos status between active and complete', async () => {
+  it("should toggle a Todo's status between complte and active", async () => {
     const { findByTestId, getByRole, getByText } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
@@ -37,18 +36,18 @@ describe('TodoItem', () => {
       getByRole('option', { name: 'Tech' })
     );
 
-    expect(getByText('My first todo 1')).not.toHaveClass('strikethrough');
+    expect(getByText('My first todo 1')).toHaveClass('strikethrough');
 
     // toggle active
     userEvent.click(getByText('My first todo 1'));
 
     await waitFor(() =>
-      expect(getByText('My first todo 1')).toHaveClass('strikethrough')
+      expect(getByText('My first todo 1')).not.toHaveClass('strikethrough')
     );
   });
 
-  it('should remove the todo', async () => {
-    const { findByTestId, getByRole, getByTestId, getByText, queryByText } =
+  it('should remove a todo', async () => {
+    const { findByTestId, getByRole, getAllByTestId, getByText, queryByText } =
       render(
         <ApolloProvider client={apolloClient}>
           <Todos />
@@ -66,7 +65,7 @@ describe('TodoItem', () => {
 
     expect(getByText('My first todo 1')).toBeDefined();
 
-    userEvent.click(getByTestId('remove-todo'));
+    userEvent.click(getAllByTestId('remove-todo')[0]);
 
     await waitFor(() => expect(queryByText('My first todo 1')).toBeNull());
   });

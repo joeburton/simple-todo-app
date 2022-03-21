@@ -40,6 +40,8 @@ const Todos = () => {
     }
   };
 
+  console.log(data, loading, error);
+
   if (loading) return <div data-testid='loading'>Loading...</div>;
 
   if (error) return <>Error...</>;

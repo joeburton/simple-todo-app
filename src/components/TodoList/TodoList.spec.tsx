@@ -8,8 +8,8 @@ import { Todo } from '../../interfaces/index';
 
 import todos from '../../../mocks/data';
 
-describe('TodoItem', () => {
-  it('should render a TodoItem', async () => {
+describe('TodoList', () => {
+  it('should render a TodoList', async () => {
     const { findAllByTestId, queryAllByTestId } = render(
       <ApolloProvider client={apolloClient}>
         <TodoList
