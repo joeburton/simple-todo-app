@@ -1,9 +1,4 @@
-import {
-  findAllByTestId,
-  queryAllByTestId,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { ApolloProvider } from '@apollo/client';
