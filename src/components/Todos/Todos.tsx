@@ -31,8 +31,6 @@ const Todos = () => {
         complete: false,
       };
 
-      console.log(todo);
-
       if (newTodoRef.current) {
         addTodo({
           variables: todo,
