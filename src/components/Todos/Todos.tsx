@@ -54,7 +54,6 @@ const Todos = () => {
             { value: 'tech', label: 'Tech' },
           ]}
           onChange={(value) => {
-            console.log('lisp', value);
             setSelectedListId(value);
           }}
           customStyles={{ minWidth: '200px', height: '38px' }}
