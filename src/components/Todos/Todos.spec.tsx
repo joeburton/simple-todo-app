@@ -7,7 +7,7 @@ import apolloClient from '../../apollo/apolloClient';
 import Todos from './Todos';
 
 describe('TodoItem', () => {
-  it('should render a TodoItem', async () => {
+  it('should render a TodoItem within the overall Todo component', async () => {
     const { getByTestId } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />

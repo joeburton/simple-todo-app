@@ -31,10 +31,12 @@ const Todos = () => {
         complete: false,
       };
 
+      debugger;
       if (newTodoRef.current) {
         addTodo({
           variables: todo,
         });
+        console.log(newTodoRef.current.value);
         newTodoRef.current.value = '';
       }
     }
