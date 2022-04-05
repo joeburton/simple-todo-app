@@ -20,7 +20,7 @@ describe('TodoItem', () => {
     expect(todoItem).toBeDefined();
   });
 
-  it("should toggle a Todo's status between complte and active", async () => {
+  it("should toggle a Todo's status between active and complete", async () => {
     const { findByTestId, getByRole, getByText } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
@@ -36,13 +36,13 @@ describe('TodoItem', () => {
       getByRole('option', { name: 'Tech' })
     );
 
-    expect(getByText('My first todo 1')).toHaveClass('strikethrough');
+    expect(getByText('My first todo 1')).not.toHaveClass('strikethrough');
 
     // toggle active
     userEvent.click(getByText('My first todo 1'));
 
     await waitFor(() =>
-      expect(getByText('My first todo 1')).not.toHaveClass('strikethrough')
+      expect(getByText('My first todo 1')).toHaveClass('strikethrough')
     );
   });
 
@@ -65,7 +65,7 @@ describe('TodoItem', () => {
 
     expect(getByText('My first todo 1')).toBeDefined();
 
-    userEvent.click(getAllByTestId('remove-todo')[0]);
+    userEvent.click(getAllByTestId('remove-todo')[1]);
 
     await waitFor(() => expect(queryByText('My first todo 1')).toBeNull());
   });

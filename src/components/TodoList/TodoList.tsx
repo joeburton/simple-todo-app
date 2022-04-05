@@ -11,7 +11,6 @@ interface TodoListProps {
 
 const TodoList = ({ filterFn, todos }: TodoListProps) => {
   const sortedTodos = filterFn ? todos?.filter(filterFn) : todos;
-
   return (
     <ul className={styles.todosList}>
       {sortedTodos.map((todo: Todo, i: Key | null | undefined) => (

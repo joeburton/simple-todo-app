@@ -31,12 +31,10 @@ const Todos = () => {
         complete: false,
       };
 
-      debugger;
       if (newTodoRef.current) {
         addTodo({
           variables: todo,
         });
-        console.log(newTodoRef.current.value);
         newTodoRef.current.value = '';
       }
     }
@@ -51,7 +49,7 @@ const Todos = () => {
       <div className={styles.selectList} data-testid='todos-container'>
         <SelectMenu
           options={[
-            { value: 'default', label: 'Default List' },
+            { value: 'default', label: 'Select List' },
             { value: 'general', label: 'General' },
             { value: 'tech', label: 'Tech' },
           ]}
@@ -61,35 +59,39 @@ const Todos = () => {
           customStyles={{ minWidth: '200px', height: '38px' }}
         />
       </div>
-      <div className={styles.addTodo}>
-        <input
-          ref={newTodoRef}
-          className={styles.todo}
-          data-testid='add-todo-input'
-        />
-        <Button
-          className={styles.add}
-          onClick={addNewTodo}
-          variant='outlined'
-          sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
-        >
-          ADD
-        </Button>
-      </div>
-      <h2>Active</h2>
-      <TodoList
-        filterFn={(todo: Todo) =>
-          todo.complete === false && todo.listId === selectedListId
-        }
-        todos={data?.getTodos}
-      />
-      <h2>Complete</h2>
-      <TodoList
-        filterFn={(todo: Todo) =>
-          todo.complete === true && todo.listId === selectedListId
-        }
-        todos={data?.getTodos}
-      />
+      {selectedListId !== 'default' && (
+        <>
+          <div className={styles.addTodo}>
+            <input
+              ref={newTodoRef}
+              className={styles.todo}
+              data-testid='add-todo-input'
+            />
+            <Button
+              className={styles.add}
+              onClick={addNewTodo}
+              variant='outlined'
+              sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
+            >
+              ADD
+            </Button>
+          </div>
+          <h2>Active</h2>
+          <TodoList
+            filterFn={(todo: Todo) =>
+              todo.complete === false && todo.listId === selectedListId
+            }
+            todos={data?.getTodos}
+          />
+          <h2>Complete</h2>
+          <TodoList
+            filterFn={(todo: Todo) =>
+              todo.complete === true && todo.listId === selectedListId
+            }
+            todos={data?.getTodos}
+          />
+        </>
+      )}
     </>
   );
 };

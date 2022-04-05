@@ -4,13 +4,13 @@ const todos = [
     listId: 'tech',
     title: 'My first todo 1',
     detail: 'So much detail',
-    complete: true,
+    complete: false,
     date: '1/1/2020',
   },
   {
     id: '6228e38df41cdf8ac72bb1d0',
-    listId: 'default',
-    title: 'My first todo 2',
+    listId: 'general',
+    title: 'My second todo 2',
     detail: 'So much detail',
     complete: false,
     date: '1/1/2020',
@@ -18,9 +18,9 @@ const todos = [
   {
     id: '6228e38df41cdf8ac72bb1df',
     listId: 'tech',
-    title: 'My second todo 3',
+    title: 'My third todo 3',
     detail: 'so much detail',
-    complete: true,
+    complete: false,
     date: '19/03/22',
   },
 ];

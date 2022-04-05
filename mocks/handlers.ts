@@ -31,10 +31,10 @@ export const handlers = [
       ctx.data({
         addTodo: {
           id: '623899eb1919a658e96f5d83',
-          listId: 'default',
+          listId: 'tech',
           title: 'new todo',
           detail: 'just add a todo',
-          complete: true,
+          complete: false,
           date: '1/1/2020',
         },
       })

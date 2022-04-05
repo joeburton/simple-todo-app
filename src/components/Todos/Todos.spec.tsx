@@ -6,38 +6,55 @@ import apolloClient from '../../apollo/apolloClient';
 
 import Todos from './Todos';
 
-describe('TodoItem', () => {
-  it('should render a TodoItem within the overall Todo component', async () => {
-    const { getByTestId } = render(
+describe('Todos', () => {
+  it('should render the entire Todos App', async () => {
+    const { getAllByTestId, findByTestId, getByRole } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
       </ApolloProvider>
     );
 
-    await waitFor(() => expect(getByTestId('todo-item')).toBeInTheDocument());
+    await findByTestId('todos-container');
+
+    userEvent.selectOptions(
+      // Find the select element
+      getByRole('combobox'),
+      // Find and select the Tech option
+      getByRole('option', { name: 'Tech' })
+    );
+
+    await waitFor(() => expect(getAllByTestId('todo-item').length).toEqual(2));
   });
 
   it('should add a new todo', async () => {
-    const { getByTestId, getByText, queryAllByTestId } = render(
-      <ApolloProvider client={apolloClient}>
-        <Todos />
-      </ApolloProvider>
+    const { findByTestId, getByRole, getByTestId, getByText, getAllByTestId } =
+      render(
+        <ApolloProvider client={apolloClient}>
+          <Todos />
+        </ApolloProvider>
+      );
+
+    await findByTestId('todos-container');
+
+    userEvent.selectOptions(
+      // Find the select element
+      getByRole('combobox'),
+      // Find and select the Tech option
+      getByRole('option', { name: 'Tech' })
     );
 
-    await waitFor(() => expect(getByTestId('todo-item')).toBeInTheDocument());
+    await waitFor(() => expect(getAllByTestId('todo-item').length).toEqual(2));
 
     const addTodoInput = getByTestId('add-todo-input');
 
-    userEvent.type(addTodoInput, 'my new todo text');
+    userEvent.type(addTodoInput, 'new todo');
 
-    expect(addTodoInput).toHaveValue('my new todo text');
+    expect(addTodoInput).toHaveValue('new todo');
 
     userEvent.click(getByText('ADD'));
 
-    await waitFor(() =>
-      expect(queryAllByTestId('todo-item').length).toEqual(2)
-    );
+    await waitFor(() => expect(getByText('new todo')).toBeInTheDocument());
 
-    expect(getByText('new todo')).toBeInTheDocument();
+    await waitFor(() => expect(getAllByTestId('todo-item').length).toEqual(3));
   });
 });
