@@ -26,4 +26,12 @@ const GET_TODO = gql`
   }
 `;
 
-export { GET_TODO, GET_TODOS };
+const GET_LIST_IDS = gql`
+  query GetListIds {
+    getListIds {
+      listId
+    }
+  }
+`;
+
+export { GET_TODO, GET_TODOS, GET_LIST_IDS };
