@@ -1,6 +1,6 @@
 import { graphql } from 'msw';
 
-import data from './data';
+import { todos, listIds } from './data';
 
 export const handlers = [
   graphql.mutation(`UpdateTodo`, (_req, res, ctx) => {
@@ -43,7 +43,14 @@ export const handlers = [
   graphql.query('GetTodos', (_req, res, ctx) => {
     return res(
       ctx.data({
-        getTodos: data,
+        getTodos: todos,
+      })
+    );
+  }),
+  graphql.query('GetListIds', (_req, res, ctx) => {
+    return res(
+      ctx.data({
+        getListIds: listIds,
       })
     );
   }),

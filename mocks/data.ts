@@ -1,4 +1,4 @@
-const todos = [
+export const todos = [
   {
     id: '6228e38df41cdf8ac72bb1d0',
     listId: 'tech',
@@ -25,4 +25,8 @@ const todos = [
   },
 ];
 
-export default todos;
+export const listIds = [
+  { listId: 'Default' },
+  { listId: 'Tech' },
+  { listId: 'General' },
+];

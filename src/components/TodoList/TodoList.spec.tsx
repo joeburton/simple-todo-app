@@ -6,7 +6,7 @@ import apolloClient from '../../apollo/apolloClient';
 import TodoList from './TodoList';
 import { Todo } from '../../interfaces/index';
 
-import todos from '../../../mocks/data';
+import { todos } from '../../../mocks/data';
 
 describe('TodoList', () => {
   it('should render a TodoList', async () => {

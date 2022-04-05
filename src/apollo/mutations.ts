@@ -58,4 +58,12 @@ const DELETE_TODO = gql`
   }
 `;
 
-export { ADD_TODO, UPDATE_TODO, DELETE_TODO };
+const ADD_LIST_ID = gql`
+  mutation AddListId($listId: String) {
+    addListId(listId: $listId) {
+      listId
+    }
+  }
+`;
+
+export { ADD_TODO, UPDATE_TODO, DELETE_TODO, ADD_LIST_ID };

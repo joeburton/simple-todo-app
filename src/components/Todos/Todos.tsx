@@ -4,20 +4,29 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import styles from './Todos.module.css';
 
-import { TodoList, SelectMenu } from '../';
+import { TodoList } from '../';
 import { Todo } from '../../interfaces';
-import { ADD_TODO } from '../../apollo/mutations';
-import { GET_TODOS } from '../../apollo/queries';
+import { ADD_TODO, ADD_LIST_ID } from '../../apollo/mutations';
+import { GET_TODOS, GET_LIST_IDS } from '../../apollo/queries';
 import { updateCache, ACTIONS } from '../../apollo/updateCache';
 import { ListSelector } from '../';
 
 const Todos = () => {
-  const { loading, error, data } = useQuery(GET_TODOS);
+  const {
+    loading: loadingTodos,
+    error: errorTodos,
+    data: dataTodos,
+  } = useQuery(GET_TODOS);
+
+  const { data: dataListIds } = useQuery(GET_LIST_IDS);
+
   const [selectedListId, setSelectedListId] = useState<string>('default');
 
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateCache(ACTIONS.ADD_NEW_TODO),
   });
+
+  const [addListId] = useMutation(ADD_LIST_ID);
 
   const newTodoRef = useRef<HTMLInputElement>(null);
   const newTodoListRef = useRef<HTMLInputElement>(null);
@@ -42,41 +51,29 @@ const Todos = () => {
     }
   };
 
-  if (loading) return <div data-testid='loading'>Loading...</div>;
+  if (loadingTodos) return <div data-testid='loading'>Loading...</div>;
 
-  if (error) return <>Error...</>;
+  if (errorTodos) return <>Error...</>;
 
   return (
     <>
-      <ListSelector />
-      <div className={styles.selectList} data-testid='todos-container'>
-        <SelectMenu
-          options={[
-            { value: 'default', label: 'Select List' },
-            { value: 'general', label: 'General' },
-            { value: 'tech', label: 'Tech' },
-          ]}
-          onChange={(value) => {
-            setSelectedListId(value);
-          }}
-          customStyles={{ minWidth: '200px', height: '38px' }}
+      {dataListIds && (
+        <ListSelector
+          setSelectedListId={setSelectedListId}
+          dataListIds={dataListIds?.getListIds}
         />
-      </div>
+      )}
       {selectedListId === 'default' && (
         <div className={styles.addList}>
           <input className={styles.addListInput} ref={newTodoListRef} />
           <Button
             className={styles.add}
             onClick={() => {
-              // @todo need to look into list title further...
-              // addTodo({
-              //   variables: {
-              //     listId: newTodoListRef?.current?.value,
-              //     title: 'list',
-              //     date: new Date(),
-              //     complete: false,
-              //   },
-              // });
+              addListId({
+                variables: {
+                  listId: newTodoListRef?.current?.value,
+                },
+              });
             }}
             variant='outlined'
             sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
@@ -107,14 +104,14 @@ const Todos = () => {
             filterFn={(todo: Todo) =>
               todo.complete === false && todo.listId === selectedListId
             }
-            todos={data?.getTodos}
+            todos={dataTodos?.getTodos}
           />
           <h2>Complete</h2>
           <TodoList
             filterFn={(todo: Todo) =>
               todo.complete === true && todo.listId === selectedListId
             }
-            todos={data?.getTodos}
+            todos={dataTodos?.getTodos}
           />
         </>
       )}

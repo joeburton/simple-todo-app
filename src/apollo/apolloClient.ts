@@ -7,6 +7,7 @@ export const cache = new InMemoryCache({
       fields: {
         getTodos: {
           merge(_existing, incoming) {
+            console.log(_existing);
             return incoming;
           },
         },
@@ -23,7 +24,8 @@ switch (env) {
     graph = 'http://localhost:3000';
     break;
   default:
-    graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
+    // graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
+    graph = 'http://localhost:4000/graphql';
     break;
 }
 

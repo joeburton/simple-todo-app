@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../../apollo/apolloClient';
-import todos from '../../../mocks/data';
+import { todos } from '../../../mocks/data';
 
 import TodoItem from './TodoItem';
 import { Todos } from '../index';
@@ -27,7 +27,7 @@ describe('TodoItem', () => {
       </ApolloProvider>
     );
 
-    await findByTestId('todos-container');
+    await findByTestId('list-selector');
 
     userEvent.selectOptions(
       // Find the select element
@@ -54,7 +54,7 @@ describe('TodoItem', () => {
         </ApolloProvider>
       );
 
-    await findByTestId('todos-container');
+    await findByTestId('list-selector');
 
     userEvent.selectOptions(
       // Find the select element

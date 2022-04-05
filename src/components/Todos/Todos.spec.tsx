@@ -14,7 +14,7 @@ describe('Todos', () => {
       </ApolloProvider>
     );
 
-    await findByTestId('todos-container');
+    await findByTestId('list-selector');
 
     userEvent.selectOptions(
       // Find the select element
@@ -34,7 +34,7 @@ describe('Todos', () => {
         </ApolloProvider>
       );
 
-    await findByTestId('todos-container');
+    await findByTestId('list-selector');
 
     userEvent.selectOptions(
       // Find the select element
