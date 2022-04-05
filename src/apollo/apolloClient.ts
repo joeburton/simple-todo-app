@@ -7,7 +7,6 @@ export const cache = new InMemoryCache({
       fields: {
         getTodos: {
           merge(_existing, incoming) {
-            console.log(_existing);
             return incoming;
           },
         },
