@@ -9,6 +9,7 @@ import { Todo } from '../../interfaces';
 import { ADD_TODO } from '../../apollo/mutations';
 import { GET_TODOS } from '../../apollo/queries';
 import { updateCache, ACTIONS } from '../../apollo/updateCache';
+import { ListSelector } from '../';
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
@@ -47,6 +48,7 @@ const Todos = () => {
 
   return (
     <>
+      <ListSelector />
       <div className={styles.selectList} data-testid='todos-container'>
         <SelectMenu
           options={[
@@ -61,28 +63,26 @@ const Todos = () => {
         />
       </div>
       {selectedListId === 'default' && (
-        <div>
-          <div className={styles.addList}>
-            <input className={styles.addListInput} ref={newTodoListRef} />
-            <Button
-              className={styles.add}
-              onClick={() => {
-                // @todo need to look into list title further...
-                // addTodo({
-                //   variables: {
-                //     listId: newTodoListRef?.current?.value,
-                //     title: 'list',
-                //     date: new Date(),
-                //     complete: false,
-                //   },
-                // });
-              }}
-              variant='outlined'
-              sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
-            >
-              ADD LIST
-            </Button>
-          </div>
+        <div className={styles.addList}>
+          <input className={styles.addListInput} ref={newTodoListRef} />
+          <Button
+            className={styles.add}
+            onClick={() => {
+              // @todo need to look into list title further...
+              // addTodo({
+              //   variables: {
+              //     listId: newTodoListRef?.current?.value,
+              //     title: 'list',
+              //     date: new Date(),
+              //     complete: false,
+              //   },
+              // });
+            }}
+            variant='outlined'
+            sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
+          >
+            ADD LIST
+          </Button>
         </div>
       )}
       {selectedListId !== 'default' && (
