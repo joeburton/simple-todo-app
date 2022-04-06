@@ -30,6 +30,7 @@ const GET_LIST_IDS = gql`
   query GetListIds {
     getListIds {
       listId
+      id
     }
   }
 `;

@@ -55,7 +55,9 @@ const Todos = () => {
           dataListIds={dataListIds?.getListIds}
         />
       )}
-      {selectedListId === 'manage-lists' && <ManageLists />}
+      {selectedListId === 'manage-lists' && (
+        <ManageLists dataListIds={dataListIds?.getListIds} />
+      )}
 
       {selectedListId !== 'manage-lists' && (
         <>

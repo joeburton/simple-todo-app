@@ -4,7 +4,7 @@ import styles from './ListSelector.module.css';
 
 interface ListSelectorProps {
   setSelectedListId: (value: string) => void;
-  dataListIds: Array<{ listId: string }>;
+  dataListIds: Array<{ listId: string; id: string }>;
 }
 
 const ListSelector = ({
@@ -17,9 +17,11 @@ const ListSelector = ({
   }> | null>();
 
   useEffect(() => {
-    const optionValues = dataListIds.map((item: { listId: string }) => {
-      return { value: item.listId.toLowerCase(), label: item.listId };
-    });
+    const optionValues = dataListIds.map(
+      (item: { listId: string; id: string }) => {
+        return { value: item.listId.toLowerCase(), label: item.listId };
+      }
+    );
 
     optionValues.unshift({ value: 'manage-lists', label: 'Manage Lists' });
 

@@ -1,3 +1,22 @@
+.lists {
+  padding: 0;
+}
+
+.lists li {
+  display: flex;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 20px;
+  margin: 4px 0 12px;
+}
+
+.listName {
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+}
+
 .addListInput {
   padding: 0 10px 0 10px;
   font-size: 0.875rem;
