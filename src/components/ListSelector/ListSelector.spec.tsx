@@ -10,12 +10,7 @@ describe('ListSelector', () => {
   it('should render the SelectMenu and all options', () => {
     const { getByTestId } = render(
       <ApolloProvider client={apolloClient}>
-        <ListSelector
-          setSelectedListId={(e) => {
-            console.log(e);
-          }}
-          dataListIds={listIds}
-        />
+        <ListSelector setSelectedListId={(e) => {}} dataListIds={listIds} />
       </ApolloProvider>
     );
     expect(getByTestId('list-selector')).toBeDefined();

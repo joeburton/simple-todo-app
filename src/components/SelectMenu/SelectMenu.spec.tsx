@@ -12,9 +12,7 @@ const renderSelectMenu = () => {
           { value: 'general', label: 'General' },
           { value: 'tech', label: 'Tech' },
         ]}
-        onChange={(value) => {
-          // console.log('onChange', value);
-        }}
+        onChange={(value) => {}}
         customStyles={{ minWidth: '200px', height: '38px' }}
       />
     ),
