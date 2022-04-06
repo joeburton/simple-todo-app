@@ -21,6 +21,8 @@ const ListSelector = ({
       return { value: item.listId.toLowerCase(), label: item.listId };
     });
 
+    optionValues.unshift({ value: 'manage-lists', label: 'Manage Lists' });
+
     setOptionData(optionValues);
   }, [dataListIds]);
 

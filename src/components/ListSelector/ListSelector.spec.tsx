@@ -2,13 +2,9 @@ import { ApolloProvider } from '@apollo/client';
 import { render } from '@testing-library/react';
 import apolloClient from '../../apollo/apolloClient';
 
-import ListSelector from './ListSelector';
+import { listIds } from '../../../mocks/data';
 
-const listIds = [
-  { listId: 'health' },
-  { listId: 'challenge' },
-  { listId: 'stepup' },
-];
+import ListSelector from './ListSelector';
 
 describe('ListSelector', () => {
   it('should render the SelectMenu and all options', () => {

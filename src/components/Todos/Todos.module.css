@@ -3,13 +3,7 @@
   margin: 0 0 32px 0;
 }
 
-.addTodoInput,
-.addListInput {
+.addTodoInput {
   padding: 0 10px 0 10px;
   font-size: 0.875rem;
-}
-
-.addList {
-  display: flex;
-  margin: 0 0 32px 0;
 }
