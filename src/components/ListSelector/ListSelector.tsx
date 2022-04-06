@@ -3,13 +3,13 @@ import { SelectMenu } from '../SelectMenu';
 import styles from './ListSelector.module.css';
 
 interface ListSelectorProps {
-  setSelectedListId: (value: string) => void;
-  dataListIds: Array<{ listId: string; id: string }>;
+  setSelectedListName: (value: string) => void;
+  dataListNames: Array<{ listName: string; id: string }>;
 }
 
 const ListSelector = ({
-  setSelectedListId,
-  dataListIds,
+  setSelectedListName,
+  dataListNames,
 }: ListSelectorProps) => {
   const [optonData, setOptionData] = useState<Array<{
     value: string;
@@ -17,16 +17,16 @@ const ListSelector = ({
   }> | null>();
 
   useEffect(() => {
-    const optionValues = dataListIds.map(
-      (item: { listId: string; id: string }) => {
-        return { value: item.listId.toLowerCase(), label: item.listId };
+    const optionValues = dataListNames.map(
+      (item: { listName: string; id: string }) => {
+        return { value: item.listName.toLowerCase(), label: item.listName };
       }
     );
 
     optionValues.unshift({ value: 'manage-lists', label: 'Manage Lists' });
 
     setOptionData(optionValues);
-  }, [dataListIds]);
+  }, [dataListNames]);
 
   return (
     <div className={styles.selectList} data-testid='list-selector'>
@@ -34,7 +34,7 @@ const ListSelector = ({
         <SelectMenu
           options={optonData}
           onChange={(value) => {
-            setSelectedListId(value);
+            setSelectedListName(value);
           }}
           customStyles={{ minWidth: '200px', height: '38px' }}
         />

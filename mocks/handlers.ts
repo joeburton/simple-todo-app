@@ -1,6 +1,6 @@
 import { graphql } from 'msw';
 
-import { todos, listIds } from './data';
+import { todos, listNames } from './data';
 
 export const handlers = [
   graphql.mutation(`UpdateTodo`, (_req, res, ctx) => {
@@ -9,7 +9,7 @@ export const handlers = [
         updateTodo: [
           {
             id: '6228e38df41cdf8ac72bb1d0',
-            listId: 'tech',
+            listName: 'tech',
             title: 'My first todo 1',
             detail: 'So much detail',
             complete: true,
@@ -31,7 +31,7 @@ export const handlers = [
       ctx.data({
         addTodo: {
           id: '623899eb1919a658e96f5d83',
-          listId: 'tech',
+          listName: 'tech',
           title: 'new todo',
           detail: 'just add a todo',
           complete: false,
@@ -47,10 +47,10 @@ export const handlers = [
       })
     );
   }),
-  graphql.query('GetListIds', (_req, res, ctx) => {
+  graphql.query('GetListNames', (_req, res, ctx) => {
     return res(
       ctx.data({
-        getListIds: listIds,
+        getListNames: listNames,
       })
     );
   }),

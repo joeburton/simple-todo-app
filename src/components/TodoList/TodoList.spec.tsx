@@ -14,7 +14,7 @@ describe('TodoList', () => {
       <ApolloProvider client={apolloClient}>
         <TodoList
           filterFn={(todo: Todo) =>
-            todo.complete === false && todo.listId === 'tech'
+            todo.complete === false && todo.listName === 'tech'
           }
           todos={todos}
         />

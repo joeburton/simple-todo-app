@@ -2,21 +2,21 @@ import styles from './ManageLists.module.css';
 import Button from '@mui/material/Button';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
-import { ADD_LIST_ID, DELETE_LIST_ID } from '../../apollo/mutations';
+import { ADD_LIST_NAME, DELETE_LIST_NAME } from '../../apollo/mutations';
 import { useRef } from 'react';
 import { useMutation } from '@apollo/client';
 
 interface ListSelectorProps {
-  dataListIds: Array<{ listId: string; id: string }>;
+  dataListNames: Array<{ listName: string; id: string }>;
 }
 
-const ManageLists = ({ dataListIds }: ListSelectorProps) => {
+const ManageLists = ({ dataListNames }: ListSelectorProps) => {
   const newTodoListRef = useRef<HTMLInputElement>(null);
-  const [addListId] = useMutation(ADD_LIST_ID);
-  const [deleteListId] = useMutation(DELETE_LIST_ID);
+  const [addListName] = useMutation(ADD_LIST_NAME);
+  const [deleteListName] = useMutation(DELETE_LIST_NAME);
 
-  const removeList = (id: string) => {
-    deleteListId({
+  const removeListName = (id: string) => {
+    deleteListName({
       variables: { id: id },
     });
   };
@@ -28,9 +28,9 @@ const ManageLists = ({ dataListIds }: ListSelectorProps) => {
         <Button
           className={styles.add}
           onClick={() => {
-            addListId({
+            addListName({
               variables: {
-                listId: newTodoListRef?.current?.value,
+                listName: newTodoListRef?.current?.value,
               },
             });
           }}
@@ -42,11 +42,11 @@ const ManageLists = ({ dataListIds }: ListSelectorProps) => {
       </div>
       <h2>Remove List</h2>
       <ul data-testid='lists' className={styles.lists}>
-        {dataListIds?.map((item: { listId: string; id: string }) => (
-          <li key={item.listId} onClick={() => removeList(item.id)}>
+        {dataListNames?.map((item: { listName: string; id: string }) => (
+          <li key={item.listName} onClick={() => removeListName(item.id)}>
             <div className={styles.listName}>
               <ModeStandbyIcon sx={{ fontSize: '1.2rem' }} />
-              <span>{item.listId}</span>
+              <span>{item.listName}</span>
             </div>
             <DeleteOutlineIcon />
           </li>

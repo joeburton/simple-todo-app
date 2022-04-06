@@ -2,21 +2,21 @@ import { gql } from '@apollo/client';
 
 const ADD_TODO = gql`
   mutation AddTodo(
-    $listId: String
+    $listName: String
     $title: String
     $detail: String
     $complete: Boolean
     $date: Date
   ) {
     addTodo(
-      listId: $listId
+      listName: $listName
       title: $title
       detail: $detail
       complete: $complete
       date: $date
     ) {
       id
-      listId
+      listName
       title
       detail
       complete
@@ -28,7 +28,7 @@ const ADD_TODO = gql`
 const UPDATE_TODO = gql`
   mutation UpdateTodo(
     $id: ID
-    $listId: String
+    $listName: String
     $title: String
     $detail: String
     $complete: Boolean
@@ -36,14 +36,14 @@ const UPDATE_TODO = gql`
   ) {
     updateTodo(
       id: $id
-      listId: $listId
+      listName: $listName
       title: $title
       detail: $detail
       complete: $complete
       date: $date
     ) {
       id
-      listId
+      listName
       title
       detail
       complete
@@ -58,18 +58,18 @@ const DELETE_TODO = gql`
   }
 `;
 
-const ADD_LIST_ID = gql`
-  mutation AddListId($listId: String) {
-    addListId(listId: $listId) {
-      listId
+const ADD_LIST_NAME = gql`
+  mutation AddListName($listName: String) {
+    addListName(listName: $listName) {
+      listName
     }
   }
 `;
 
-const DELETE_LIST_ID = gql`
-  mutation DeleteList($id: ID) {
-    deleteListId(id: $id)
+const DELETE_LIST_NAME = gql`
+  mutation DeleteListName($id: ID) {
+    deleteListName(id: $id)
   }
 `;
 
-export { ADD_TODO, UPDATE_TODO, DELETE_TODO, ADD_LIST_ID, DELETE_LIST_ID };
+export { ADD_TODO, UPDATE_TODO, DELETE_TODO, ADD_LIST_NAME, DELETE_LIST_NAME };

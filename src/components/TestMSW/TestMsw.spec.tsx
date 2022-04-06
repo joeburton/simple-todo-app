@@ -14,7 +14,7 @@ const handlers = [
         getTodos: [
           {
             id: '6228e38df41cdf8ac72bb1d0',
-            listId: 'tech 1',
+            listName: 'tech 1',
             title: 'My first todo',
             detail: 'So much detail',
             complete: false,
@@ -22,7 +22,7 @@ const handlers = [
           },
           {
             id: '6228e38df41cdf8ac72bb1d0',
-            listId: 'tech 2',
+            listName: 'tech 2',
             title: 'My first todo',
             detail: 'So much detail',
             complete: false,

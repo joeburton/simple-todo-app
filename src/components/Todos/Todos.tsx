@@ -6,16 +6,17 @@ import styles from './Todos.module.css';
 
 import { Todo } from '../../interfaces';
 import { ADD_TODO } from '../../apollo/mutations';
-import { GET_TODOS, GET_LIST_IDS } from '../../apollo/queries';
+import { GET_TODOS, GET_LIST_NAMES } from '../../apollo/queries';
 import { updateCache, ACTIONS } from '../../apollo/updateCache';
 import { ListSelector, ManageLists, TodoList } from '../';
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
 
-  const { data: dataListIds } = useQuery(GET_LIST_IDS);
+  const { data: dataListNames } = useQuery(GET_LIST_NAMES);
 
-  const [selectedListId, setSelectedListId] = useState<string>('manage-lists');
+  const [selectedListId, setSelectedListName] =
+    useState<string>('manage-lists');
 
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateCache(ACTIONS.ADD_NEW_TODO),
@@ -28,7 +29,7 @@ const Todos = () => {
     if (newTodoRef?.current?.value) {
       const todo = {
         title: newTodoRef?.current?.value,
-        listId: selectedListId,
+        listName: selectedListId,
         detail: '',
         date: new Date(),
         complete: false,
@@ -49,14 +50,14 @@ const Todos = () => {
 
   return (
     <>
-      {dataListIds && (
+      {dataListNames && (
         <ListSelector
-          setSelectedListId={setSelectedListId}
-          dataListIds={dataListIds?.getListIds}
+          setSelectedListName={setSelectedListName}
+          dataListNames={dataListNames?.getListNames}
         />
       )}
       {selectedListId === 'manage-lists' && (
-        <ManageLists dataListIds={dataListIds?.getListIds} />
+        <ManageLists dataListNames={dataListNames?.getListNames} />
       )}
 
       {selectedListId !== 'manage-lists' && (
@@ -80,14 +81,14 @@ const Todos = () => {
           <h2>Active</h2>
           <TodoList
             filterFn={(todo: Todo) =>
-              todo.complete === false && todo.listId === selectedListId
+              todo.complete === false && todo.listName === selectedListId
             }
             todos={data?.getTodos}
           />
           <h2>Complete</h2>
           <TodoList
             filterFn={(todo: Todo) =>
-              todo.complete === true && todo.listId === selectedListId
+              todo.complete === true && todo.listName === selectedListId
             }
             todos={data?.getTodos}
           />

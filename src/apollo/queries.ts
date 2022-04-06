@@ -4,7 +4,7 @@ const GET_TODOS = gql`
   query GetTodos {
     getTodos {
       id
-      listId
+      listName
       title
       detail
       complete
@@ -17,7 +17,7 @@ const GET_TODO = gql`
   query GetTodo($id: ID) {
     getTodo(id: $id) {
       id
-      listId
+      listName
       title
       detail
       complete
@@ -26,13 +26,13 @@ const GET_TODO = gql`
   }
 `;
 
-const GET_LIST_IDS = gql`
-  query GetListIds {
-    getListIds {
-      listId
+const GET_LIST_NAMES = gql`
+  query GetListNames {
+    getListNames {
+      listName
       id
     }
   }
 `;
 
-export { GET_TODO, GET_TODOS, GET_LIST_IDS };
+export { GET_TODO, GET_TODOS, GET_LIST_NAMES };
