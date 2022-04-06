@@ -15,7 +15,7 @@ const Todos = () => {
 
   const { data: dataListNames } = useQuery(GET_LIST_NAMES);
 
-  const [selectedListId, setSelectedListName] =
+  const [selectedListName, setSelectedListName] =
     useState<string>('manage-lists');
 
   const [addTodo] = useMutation(ADD_TODO, {
@@ -29,7 +29,7 @@ const Todos = () => {
     if (newTodoRef?.current?.value) {
       const todo = {
         title: newTodoRef?.current?.value,
-        listName: selectedListId,
+        listName: selectedListName,
         detail: '',
         date: new Date(),
         complete: false,
@@ -56,11 +56,11 @@ const Todos = () => {
           dataListNames={dataListNames?.getListNames}
         />
       )}
-      {selectedListId === 'manage-lists' && (
+      {selectedListName === 'manage-lists' && (
         <ManageLists dataListNames={dataListNames?.getListNames} />
       )}
 
-      {selectedListId !== 'manage-lists' && (
+      {selectedListName !== 'manage-lists' && (
         <>
           <div className={styles.addTodo}>
             <input
@@ -81,14 +81,14 @@ const Todos = () => {
           <h2>Active</h2>
           <TodoList
             filterFn={(todo: Todo) =>
-              todo.complete === false && todo.listName === selectedListId
+              todo.complete === false && todo.listName === selectedListName
             }
             todos={data?.getTodos}
           />
           <h2>Complete</h2>
           <TodoList
             filterFn={(todo: Todo) =>
-              todo.complete === true && todo.listName === selectedListId
+              todo.complete === true && todo.listName === selectedListName
             }
             todos={data?.getTodos}
           />
