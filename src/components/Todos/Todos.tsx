@@ -7,7 +7,7 @@ import styles from './Todos.module.css';
 import { Todo } from '../../interfaces';
 import { ADD_TODO } from '../../apollo/mutations';
 import { GET_TODOS, GET_LIST_NAMES } from '../../apollo/queries';
-import { updateCache, ACTIONS } from '../../apollo/updateCache';
+import { updateTodosCache, ACTIONS } from '../../apollo/updateCache';
 import { ListSelector, ManageLists, TodoList } from '../';
 
 const Todos = () => {
@@ -19,7 +19,7 @@ const Todos = () => {
     useState<string>('manage-lists');
 
   const [addTodo] = useMutation(ADD_TODO, {
-    update: updateCache(ACTIONS.ADD_NEW_TODO),
+    update: updateTodosCache(ACTIONS.ADD_NEW_TODO),
   });
 
   const newTodoRef = useRef<HTMLInputElement>(null);

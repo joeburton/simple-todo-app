@@ -31,8 +31,8 @@ const SelectMenu = <T extends OptionValue>({
       data-testid='select-menu'
       role='combobox'
     >
-      {options.map((option) => (
-        <option key={option.value} value={option.value} role='option'>
+      {options.map((option, index) => (
+        <option key={index} value={option.value} role='option'>
           {option.label}
         </option>
       ))}

@@ -62,6 +62,7 @@ const ADD_LIST_NAME = gql`
   mutation AddListName($listName: String) {
     addListName(listName: $listName) {
       listName
+      id
     }
   }
 `;

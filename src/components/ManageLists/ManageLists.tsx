@@ -8,21 +8,42 @@ import styles from './ManageLists.module.css';
 
 import { ADD_LIST_NAME, DELETE_LIST_NAME } from '../../apollo/mutations';
 import { useMutation } from '@apollo/client';
+import { ACTIONS, updateListNamesCache } from '../../apollo/updateCache';
 
 interface ListSelectorProps {
   dataListNames: Array<{ listName: string; id: string }>;
 }
 
-const ManageLists = ({ dataListNames }: ListSelectorProps) => {
-  const newTodoListRef = useRef<HTMLInputElement>(null);
-  const [addListName] = useMutation(ADD_LIST_NAME);
-  const [deleteListName] = useMutation(DELETE_LIST_NAME);
+const ListItem = ({ listName, id }: { listName: string; id: string }) => {
+  const [deleteListName] = useMutation(DELETE_LIST_NAME, {
+    update: updateListNamesCache(ACTIONS.DELETE_LIST, { id: id }),
+  });
 
-  const removeListName = (id: string) => {
+  const removeListName = () => {
     deleteListName({
       variables: { id: id },
     });
   };
+
+  return (
+    <li onClick={removeListName}>
+      <div className={styles.listName}>
+        <ModeStandbyIcon sx={{ fontSize: '1.2rem' }} />
+        <span>{listName}</span>
+      </div>
+      <DeleteOutlineIcon />
+    </li>
+  );
+};
+
+const ManageLists = ({ dataListNames }: ListSelectorProps) => {
+  const newTodoListRef = useRef<HTMLInputElement>(null);
+
+  const [addListName] = useMutation(ADD_LIST_NAME, {
+    update: updateListNamesCache(ACTIONS.ADD_LIST, {
+      listName: newTodoListRef?.current?.value,
+    }),
+  });
 
   return (
     <div data-testid='manage-lists'>
@@ -45,14 +66,8 @@ const ManageLists = ({ dataListNames }: ListSelectorProps) => {
       </div>
       <h2>Remove List</h2>
       <ul data-testid='lists' className={styles.lists}>
-        {dataListNames?.map((item: { listName: string; id: string }) => (
-          <li key={item.listName} onClick={() => removeListName(item.id)}>
-            <div className={styles.listName}>
-              <ModeStandbyIcon sx={{ fontSize: '1.2rem' }} />
-              <span>{item.listName}</span>
-            </div>
-            <DeleteOutlineIcon />
-          </li>
+        {dataListNames?.map((item: { listName: string; id: string }, index) => (
+          <ListItem {...item} key={index} />
         ))}
       </ul>
     </div>
