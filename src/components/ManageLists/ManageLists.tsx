@@ -1,9 +1,12 @@
-import styles from './ManageLists.module.css';
+import { useRef } from 'react';
+
 import Button from '@mui/material/Button';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
+
+import styles from './ManageLists.module.css';
+
 import { ADD_LIST_NAME, DELETE_LIST_NAME } from '../../apollo/mutations';
-import { useRef } from 'react';
 import { useMutation } from '@apollo/client';
 
 interface ListSelectorProps {
