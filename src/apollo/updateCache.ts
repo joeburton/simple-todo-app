@@ -2,8 +2,8 @@ import { Todo } from '../interfaces';
 import { GET_TODOS } from './queries';
 
 enum ACTIONS {
-  TOGGLE,
-  DELETE,
+  TOGGLE_TODO,
+  DELETE_TODO,
   ADD_NEW_TODO,
 }
 
@@ -12,13 +12,13 @@ const updateCache = (action: ACTIONS, todo?: Todo) => {
     let { getTodos } = cache.readQuery({ query: GET_TODOS });
     let updatedTodos;
 
-    if (action === ACTIONS.TOGGLE) {
+    if (action === ACTIONS.TOGGLE_TODO) {
       updatedTodos = getTodos?.map((item: Todo) =>
         item.id === todo?.id ? { ...item, complete: !item.complete } : item
       );
     }
 
-    if (action === ACTIONS.DELETE) {
+    if (action === ACTIONS.DELETE_TODO) {
       updatedTodos = getTodos?.filter((item: Todo) => item.id !== todo?.id);
     }
 

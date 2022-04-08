@@ -13,11 +13,11 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const [updateTodo, { loading }] = useMutation(UPDATE_TODO, {
-    update: updateCache(ACTIONS.TOGGLE, todo),
+    update: updateCache(ACTIONS.TOGGLE_TODO, todo),
   });
 
   const [deleteTodo] = useMutation(DELETE_TODO, {
-    update: updateCache(ACTIONS.DELETE, todo),
+    update: updateCache(ACTIONS.DELETE_TODO, todo),
   });
 
   const removeTodo = (e: React.MouseEvent<SVGElement>) => {
