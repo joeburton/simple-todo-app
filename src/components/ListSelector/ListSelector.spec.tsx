@@ -13,6 +13,7 @@ describe('ListSelector', () => {
         <ListSelector
           setSelectedListName={(e) => {}}
           dataListNames={listNames}
+          selectedOption=''
         />
       </ApolloProvider>
     );

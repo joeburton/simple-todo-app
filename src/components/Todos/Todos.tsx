@@ -54,6 +54,7 @@ const Todos = () => {
         <ListSelector
           setSelectedListName={setSelectedListName}
           dataListNames={dataListNames?.getListNames}
+          selectedOption={selectedListName}
         />
       )}
       {selectedListName === 'manage-lists' && (

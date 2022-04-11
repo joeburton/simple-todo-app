@@ -11,12 +11,14 @@ type Props<T extends OptionValue> = {
   options: Option<T>[];
   onChange: (value: T) => void;
   customStyles?: React.CSSProperties;
+  selectedOption?: string;
 };
 
 const SelectMenu = <T extends OptionValue>({
   options,
   onChange,
   customStyles,
+  selectedOption,
 }: Props<T>) => {
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const { selectedIndex } = e.currentTarget;
@@ -30,9 +32,10 @@ const SelectMenu = <T extends OptionValue>({
       style={customStyles}
       data-testid='select-menu'
       role='combobox'
+      value={selectedOption}
     >
       {options.map((option, index) => (
-        <option key={index} value={option.value} role='option'>
+        <option key={index} value={option.value}>
           {option.label}
         </option>
       ))}

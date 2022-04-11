@@ -5,11 +5,13 @@ import styles from './ListSelector.module.css';
 interface ListSelectorProps {
   setSelectedListName: (value: string) => void;
   dataListNames: Array<{ listName: string; id: string }>;
+  selectedOption: string;
 }
 
 const ListSelector = ({
   setSelectedListName,
   dataListNames,
+  selectedOption,
 }: ListSelectorProps) => {
   const [optonData, setOptionData] = useState<Array<{
     value: string;
@@ -36,6 +38,7 @@ const ListSelector = ({
           onChange={(value) => {
             setSelectedListName(value);
           }}
+          selectedOption={selectedOption}
           customStyles={{ minWidth: '200px', height: '38px' }}
         />
       )}
