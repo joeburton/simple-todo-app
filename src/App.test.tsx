@@ -1,9 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { ApolloProvider } from '@apollo/client';
+import { render } from '@testing-library/react';
+import client from './apollo/apolloClient';
 import App from './App';
 
-test.skip('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders learn react link', () => {
+  const { getByTestId } = render(
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
+  expect(getByTestId('simple-todo-app')).toBeInTheDocument();
 });

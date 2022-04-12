@@ -21,7 +21,7 @@ describe('TodoItem', () => {
   });
 
   it("should toggle a Todo's status between active and complete", async () => {
-    const { findByTestId, getByRole, getByText } = render(
+    const { findByTestId, getByRole, getByText, getByTestId } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
       </ApolloProvider>
@@ -31,7 +31,7 @@ describe('TodoItem', () => {
 
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the Tech option
       getByRole('option', { name: 'Tech' })
     );
@@ -47,18 +47,24 @@ describe('TodoItem', () => {
   });
 
   it('should remove a todo', async () => {
-    const { findByTestId, getByRole, getAllByTestId, getByText, queryByText } =
-      render(
-        <ApolloProvider client={apolloClient}>
-          <Todos />
-        </ApolloProvider>
-      );
+    const {
+      findByTestId,
+      getByRole,
+      getAllByTestId,
+      getByText,
+      queryByText,
+      getByTestId,
+    } = render(
+      <ApolloProvider client={apolloClient}>
+        <Todos />
+      </ApolloProvider>
+    );
 
     await findByTestId('list-selector');
 
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the Tech option
       getByRole('option', { name: 'Tech' })
     );

@@ -8,7 +8,7 @@ import Todos from './Todos';
 
 describe('Todos', () => {
   it('should render the entire Todos App', async () => {
-    const { getAllByTestId, findByTestId, getByRole } = render(
+    const { getAllByTestId, findByTestId, getByRole, getByTestId } = render(
       <ApolloProvider client={apolloClient}>
         <Todos />
       </ApolloProvider>
@@ -18,7 +18,7 @@ describe('Todos', () => {
 
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the Tech option
       getByRole('option', { name: 'Tech' })
     );
@@ -38,7 +38,7 @@ describe('Todos', () => {
 
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the Tech option
       getByRole('option', { name: 'Tech' })
     );

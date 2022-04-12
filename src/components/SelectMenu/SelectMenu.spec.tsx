@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { getByTestId, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import SelectMenu from './SelectMenu';
@@ -38,10 +38,10 @@ describe('SelectMenu', () => {
   });
 
   it('should allow user to select a different option', () => {
-    const { getByText, getByRole } = renderSelectMenu();
+    const { getByText, getByRole, getByTestId } = renderSelectMenu();
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the General option
       getByRole('option', { name: 'General' })
     );
@@ -56,10 +56,10 @@ describe('SelectMenu', () => {
   });
 
   it('should allow user to select a different option', () => {
-    const { getByText, getByRole } = renderSelectMenu();
+    const { getByText, getByRole, getByTestId } = renderSelectMenu();
     userEvent.selectOptions(
       // Find the select element
-      getByRole('combobox'),
+      getByTestId('select-menu'),
       // Find and select the Tech option
       getByRole('option', { name: 'Tech' })
     );

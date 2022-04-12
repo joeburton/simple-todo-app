@@ -48,7 +48,11 @@ const ManageLists = ({ dataListNames }: ListSelectorProps) => {
   return (
     <div data-testid='manage-lists'>
       <div className={styles.addList}>
-        <input className={styles.addListInput} ref={newTodoListRef} />
+        <input
+          className={styles.addListInput}
+          ref={newTodoListRef}
+          aria-label='add new list'
+        />
         <Button
           className={styles.add}
           onClick={() => {

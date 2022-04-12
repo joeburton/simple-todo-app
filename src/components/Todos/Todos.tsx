@@ -68,6 +68,7 @@ const Todos = () => {
               ref={newTodoRef}
               className={styles.addTodoInput}
               data-testid='add-todo-input'
+              aria-label='add list item'
             />
             <Button
               className={styles.add}

@@ -25,21 +25,31 @@ const SelectMenu = <T extends OptionValue>({
     const selectedOption = options[selectedIndex];
     onChange(selectedOption.value);
   };
+
   return (
     <select
       onChange={handleOnChange}
       className={styles.selectMenu}
       style={customStyles}
       data-testid='select-menu'
-      role='combobox'
       value={selectedOption}
+      aria-label='Please select a list'
     >
       {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
-        </option>
+        <Option option={option} key={index} selectedOption={selectedOption} />
       ))}
     </select>
+  );
+};
+
+const Option = ({ option, selectedOption }: any) => {
+  return (
+    <option
+      value={option.value}
+      aria-selected={selectedOption === option.value}
+    >
+      {option.label}
+    </option>
   );
 };
 
