@@ -1,4 +1,4 @@
-import { queryByTestId, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { setupServer } from 'msw/node';
 import { graphql } from 'msw';
