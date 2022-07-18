@@ -7,6 +7,13 @@ export const cache = new InMemoryCache({
       fields: {
         getTodos: {
           merge(_existing, incoming) {
+            // console.log(_existing, incoming);
+            return incoming;
+          },
+        },
+        getListNames: {
+          merge(_existing, incoming) {
+            // console.log(_existing, incoming);
             return incoming;
           },
         },
