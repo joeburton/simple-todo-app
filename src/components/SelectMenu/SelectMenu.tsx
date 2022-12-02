@@ -2,13 +2,13 @@ import styles from './SelectMenu.module.css';
 
 type OptionValue = string | number;
 
-type Option<T extends OptionValue> = {
+type OptionInterface<T extends OptionValue> = {
   value: T;
   label: string;
 };
 
 type Props<T extends OptionValue> = {
-  options: Option<T>[];
+  options: OptionInterface<T>[];
   onChange: (value: T) => void;
   customStyles?: React.CSSProperties;
   selectedOption?: string;

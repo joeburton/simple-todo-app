@@ -16,6 +16,7 @@ export const cache = new InMemoryCache({
 });
 
 const env = process.env.NODE_ENV;
+console.log(env);
 let graph: string = '';
 
 switch (env) {
@@ -23,8 +24,8 @@ switch (env) {
     graph = 'http://localhost:3000';
     break;
   default:
-    graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
-    // graph = 'http://localhost:4000/graphql';
+    // graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
+    graph = 'http://localhost:4000/graphql';
     break;
 }
 
