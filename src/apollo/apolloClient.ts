@@ -23,9 +23,11 @@ switch (env) {
   case 'test':
     graph = 'http://localhost:3000';
     break;
-  default:
-    // graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
+  case 'development':
     graph = 'http://localhost:4000/graphql';
+    break;
+  case 'production':
+    graph = 'https://apollo-3-mongoose-integration.vercel.app/graphql';
     break;
 }
 
