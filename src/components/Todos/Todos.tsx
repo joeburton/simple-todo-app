@@ -9,6 +9,7 @@ import { ADD_TODO } from '../../apollo/mutations';
 import { GET_TODOS, GET_LIST_NAMES } from '../../apollo/queries';
 import { updateTodosCache, ACTIONS } from '../../apollo/updateCache';
 import { ListSelector, ManageLists, TodoList } from '../';
+import todoList from '../../images/todo-list.png';
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
@@ -16,7 +17,7 @@ const Todos = () => {
   const { data: dataListNames } = useQuery(GET_LIST_NAMES);
 
   const [selectedListName, setSelectedListName] =
-    useState<string>('manage-lists');
+    useState<string>('default-view');
 
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateTodosCache(ACTIONS.ADD_NEW_TODO),
@@ -50,6 +51,7 @@ const Todos = () => {
 
   return (
     <>
+      <h1>Simple Todo Application</h1>
       {dataListNames && (
         <ListSelector
           setSelectedListName={setSelectedListName}
@@ -61,41 +63,46 @@ const Todos = () => {
         <ManageLists dataListNames={dataListNames?.getListNames} />
       )}
 
-      {selectedListName !== 'manage-lists' && (
-        <>
-          <div className={styles.addTodo}>
-            <input
-              ref={newTodoRef}
-              className={styles.addTodoInput}
-              data-testid='add-todo-input'
-              aria-label='add list item'
-            />
-            <Button
-              className={styles.add}
-              onClick={addNewTodo}
-              variant='outlined'
-              sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
-            >
-              ADD
-            </Button>
-          </div>
-
-          <h2>Active</h2>
-          <TodoList
-            filterFn={(todo: Todo) =>
-              todo.complete === false && todo.listName === selectedListName
-            }
-            todos={data?.getTodos}
-          />
-          <h2>Complete</h2>
-          <TodoList
-            filterFn={(todo: Todo) =>
-              todo.complete === true && todo.listName === selectedListName
-            }
-            todos={data?.getTodos}
-          />
-        </>
+      {selectedListName === 'default-view' && (
+        <h2>Create and manage simple todo lists.</h2>
       )}
+
+      {selectedListName !== 'manage-lists' &&
+        selectedListName !== 'default-view' && (
+          <>
+            <div className={styles.addTodo}>
+              <input
+                ref={newTodoRef}
+                className={styles.addTodoInput}
+                data-testid='add-todo-input'
+                aria-label='add list item'
+              />
+              <Button
+                className={styles.add}
+                onClick={addNewTodo}
+                variant='outlined'
+                sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
+              >
+                ADD
+              </Button>
+            </div>
+
+            <h2>Active</h2>
+            <TodoList
+              filterFn={(todo: Todo) =>
+                todo.complete === false && todo.listName === selectedListName
+              }
+              todos={data?.getTodos}
+            />
+            <h2>Complete</h2>
+            <TodoList
+              filterFn={(todo: Todo) =>
+                todo.complete === true && todo.listName === selectedListName
+              }
+              todos={data?.getTodos}
+            />
+          </>
+        )}
     </>
   );
 };

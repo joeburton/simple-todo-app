@@ -10,6 +10,11 @@ export const cache = new InMemoryCache({
             return incoming;
           },
         },
+        getListNames: {
+          merge(_existing, incoming) {
+            return incoming;
+          },
+        },
       },
     },
   },

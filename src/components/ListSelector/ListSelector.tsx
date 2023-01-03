@@ -25,7 +25,11 @@ const ListSelector = ({
       }
     );
 
-    optionValues.unshift({ value: 'manage-lists', label: 'Manage Lists' });
+    optionValues.unshift(
+      { value: 'default-view', label: 'Please select' },
+      { value: 'manage-lists', label: 'Manage Lists' },
+      { value: '#', label: '----Lists----' }
+    );
 
     setOptionData(optionValues);
   }, [dataListNames]);
@@ -36,6 +40,9 @@ const ListSelector = ({
         <SelectMenu
           options={optonData}
           onChange={(value) => {
+            if (value === '#') {
+              return;
+            }
             setSelectedListName(value);
           }}
           selectedOption={selectedOption}
