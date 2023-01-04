@@ -90,14 +90,18 @@ const Todos = () => {
             <h2>Active</h2>
             <TodoList
               filterFn={(todo: Todo) =>
-                todo.complete === false && todo.listName === selectedListName
+                (todo.complete === false &&
+                  todo.listName === selectedListName) ||
+                (todo.complete === false && selectedListName === 'view-all')
               }
               todos={data?.getTodos}
             />
             <h2>Complete</h2>
             <TodoList
               filterFn={(todo: Todo) =>
-                todo.complete === true && todo.listName === selectedListName
+                (todo.complete === true &&
+                  todo.listName === selectedListName) ||
+                (todo.complete === true && selectedListName === 'view-all')
               }
               todos={data?.getTodos}
             />
