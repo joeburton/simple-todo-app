@@ -7,7 +7,7 @@ type OptionInterface<T extends OptionValue> = {
   label: string;
 };
 
-type Props<T extends OptionValue> = {
+type SelectProps<T extends OptionValue> = {
   options: OptionInterface<T>[];
   onChange: (value: T) => void;
   customStyles?: React.CSSProperties;
@@ -19,7 +19,7 @@ const SelectMenu = <T extends OptionValue>({
   onChange,
   customStyles,
   selectedOption,
-}: Props<T>) => {
+}: SelectProps<T>) => {
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const { selectedIndex } = e.currentTarget;
     const selectedOption = options[selectedIndex];
