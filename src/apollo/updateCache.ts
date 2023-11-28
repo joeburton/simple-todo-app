@@ -1,10 +1,10 @@
-import { Todo } from '../interfaces';
-import { GET_TODOS, GET_LIST_NAMES } from './queries';
+import { Todo } from "../interfaces";
+import { GET_TODOS, GET_LIST_NAMES } from "./queries";
 
 enum ACTIONS {
   TOGGLE_TODO,
   DELETE_TODO,
-  ADD_NEW_TODO,
+  ADD_TODO,
   ADD_LIST,
   DELETE_LIST,
 }
@@ -24,7 +24,7 @@ const updateTodosCache = (action: ACTIONS, todo?: Todo) => {
       updatedTodos = getTodos?.filter((item: Todo) => item.id !== todo?.id);
     }
 
-    if (action === ACTIONS.ADD_NEW_TODO) {
+    if (action === ACTIONS.ADD_TODO) {
       updatedTodos = [...getTodos, response.data.addTodo];
     }
 
