@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose  --env=jsdom",
+    "test": "react-scripts test --verbose --env=jsdom",
     "runprod": "npm run build && http-server --proxy http://localhost:8080? ./build"
   },
   "eslintConfig": {
