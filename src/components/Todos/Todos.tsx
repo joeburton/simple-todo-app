@@ -50,7 +50,7 @@ const Todos = () => {
 
   return (
     <>
-      <h1>Simple Todo Application</h1>
+      <h1>Task Manager</h1>
       {dataListNames && (
         <ListSelector
           setSelectedListName={setSelectedListName}

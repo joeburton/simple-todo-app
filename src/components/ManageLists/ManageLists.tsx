@@ -11,7 +11,7 @@ import { ADD_LIST_NAME, DELETE_LIST_NAME } from "../../apollo/mutations";
 import { ACTIONS, updateListNamesCache } from "../../apollo/updateCache";
 
 interface ListSelectorProps {
-  dataListNames: Array<{ listName: string; id: string }>;
+  dataListNames: { listName: string; id: string }[];
 }
 
 const ListItem = ({ listName, id }: { listName: string; id: string }) => {
