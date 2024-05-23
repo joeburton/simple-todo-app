@@ -12,8 +12,8 @@ import { Todo } from "../../interfaces";
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
-
   const { data: dataListNames } = useQuery(GET_LIST_NAMES);
+  const [todo, setTodo] = useState("");
 
   const [selectedListName, setSelectedListName] =
     useState<string>("default-view");
@@ -22,25 +22,18 @@ const Todos = () => {
     update: updateTodosCache(ACTIONS.ADD_TODO),
   });
 
-  const [todo, setTodo] = useState("");
-
   const addNewTodo = async (e: React.MouseEvent<HTMLElement | null>) => {
-    e.preventDefault();
     if (todo) {
-      const newTodo = {
-        title: todo,
-        listName: selectedListName,
-        detail: "",
-        date: new Date(),
-        complete: false,
-      };
-
-      if (todo) {
-        addTodo({
-          variables: newTodo,
-        });
-        setTodo("");
-      }
+      addTodo({
+        variables: {
+          title: todo,
+          listName: selectedListName,
+          detail: "",
+          date: new Date(),
+          complete: false,
+        },
+      });
+      setTodo("");
     }
   };
 
