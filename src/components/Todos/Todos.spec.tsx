@@ -56,7 +56,7 @@ describe("Todos", () => {
 
     userEvent.click(screen.getByText("ADD"));
 
-    await screen.findByText("new todo");
+    await screen.findByText(/new todo/);
 
     await waitFor(() =>
       expect(screen.getAllByTestId("todo-item").length).toEqual(3)
