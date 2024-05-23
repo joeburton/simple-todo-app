@@ -1,14 +1,14 @@
-import { useRef } from 'react';
+import { useState } from "react";
 
-import Button from '@mui/material/Button';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ModeStandbyIcon from "@mui/icons-material/ModeStandby";
+import Button from "@mui/material/Button";
 
-import styles from './ManageLists.module.css';
+import styles from "./ManageLists.module.css";
 
-import { ADD_LIST_NAME, DELETE_LIST_NAME } from '../../apollo/mutations';
-import { useMutation } from '@apollo/client';
-import { ACTIONS, updateListNamesCache } from '../../apollo/updateCache';
+import { useMutation } from "@apollo/client";
+import { ADD_LIST_NAME, DELETE_LIST_NAME } from "../../apollo/mutations";
+import { ACTIONS, updateListNamesCache } from "../../apollo/updateCache";
 
 interface ListSelectorProps {
   dataListNames: Array<{ listName: string; id: string }>;
@@ -28,7 +28,7 @@ const ListItem = ({ listName, id }: { listName: string; id: string }) => {
   return (
     <li onClick={removeListName}>
       <div className={styles.listName}>
-        <ModeStandbyIcon sx={{ fontSize: '1.2rem' }} />
+        <ModeStandbyIcon sx={{ fontSize: "1.2rem" }} />
         <span>{listName}</span>
       </div>
       <DeleteOutlineIcon />
@@ -37,11 +37,11 @@ const ListItem = ({ listName, id }: { listName: string; id: string }) => {
 };
 
 const ManageLists = ({ dataListNames }: ListSelectorProps) => {
-  const newTodoListRef = useRef<HTMLInputElement>(null);
+  const [newListName, setNewListName] = useState("");
 
   const [addListName] = useMutation(ADD_LIST_NAME, {
     update: updateListNamesCache(ACTIONS.ADD_LIST, {
-      listName: newTodoListRef?.current?.value,
+      listName: newListName,
     }),
   });
 
@@ -50,20 +50,21 @@ const ManageLists = ({ dataListNames }: ListSelectorProps) => {
       <div className={styles.addList}>
         <input
           className={styles.addListInput}
-          ref={newTodoListRef}
+          value={newListName}
           aria-label='add new list'
+          onChange={(e) => setNewListName(e.target.value)}
         />
         <Button
           className={styles.add}
           onClick={() => {
             addListName({
               variables: {
-                listName: newTodoListRef?.current?.value,
+                listName: newListName,
               },
             });
           }}
           variant='outlined'
-          sx={{ marginLeft: '4px', padding: '6px', color: 'black' }}
+          sx={{ marginLeft: "4px", padding: "6px", color: "black" }}
         >
           ADD LIST
         </Button>

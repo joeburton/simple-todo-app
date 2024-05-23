@@ -13,8 +13,6 @@ describe("SelectList", () => {
       </ApolloProvider>
     );
 
-    screen.debug();
-
     await screen.findByTestId("Default");
 
     expect(screen.getByTestId("select-list")).toBeDefined();

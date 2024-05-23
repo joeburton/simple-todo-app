@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
-import Button from "@mui/material/Button";
 import { useMutation, useQuery } from "@apollo/client";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
 import styles from "./Todos.module.css";
 
-import { Todo } from "../../interfaces";
-import { ADD_TODO } from "../../apollo/mutations";
-import { GET_TODOS, GET_LIST_NAMES } from "../../apollo/queries";
-import { updateTodosCache, ACTIONS } from "../../apollo/updateCache";
 import { ListSelector, ManageLists, TodoList } from "../";
+import { ADD_TODO } from "../../apollo/mutations";
+import { GET_LIST_NAMES, GET_TODOS } from "../../apollo/queries";
+import { ACTIONS, updateTodosCache } from "../../apollo/updateCache";
+import { Todo } from "../../interfaces";
 
 const Todos = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
@@ -22,24 +22,24 @@ const Todos = () => {
     update: updateTodosCache(ACTIONS.ADD_TODO),
   });
 
-  const newTodoRef = useRef<HTMLInputElement>(null);
+  const [todo, setTodo] = useState("");
 
   const addNewTodo = async (e: React.MouseEvent<HTMLElement | null>) => {
     e.preventDefault();
-    if (newTodoRef?.current?.value) {
-      const todo = {
-        title: newTodoRef?.current?.value,
+    if (todo) {
+      const newTodo = {
+        title: todo,
         listName: selectedListName,
         detail: "",
         date: new Date(),
         complete: false,
       };
 
-      if (newTodoRef.current) {
+      if (todo) {
         addTodo({
-          variables: todo,
+          variables: newTodo,
         });
-        newTodoRef.current.value = "";
+        setTodo("");
       }
     }
   };
@@ -54,10 +54,11 @@ const Todos = () => {
       {dataListNames && (
         <ListSelector
           setSelectedListName={setSelectedListName}
-          dataListNames={dataListNames?.getListNames}
           selectedOption={selectedListName}
+          dataListNames={dataListNames?.getListNames}
         />
       )}
+
       {selectedListName === "manage-lists" && (
         <ManageLists dataListNames={dataListNames?.getListNames} />
       )}
@@ -71,7 +72,8 @@ const Todos = () => {
           <>
             <div className={styles.addTodo}>
               <input
-                ref={newTodoRef}
+                value={todo}
+                onChange={(e) => setTodo(e.target.value)}
                 className={styles.addTodoInput}
                 data-testid='add-todo-input'
                 aria-label='add list item'

@@ -3,7 +3,6 @@ import { GET_LIST_NAMES } from "../../apollo/queries";
 
 const SelectList = () => {
   const { data } = useQuery(GET_LIST_NAMES);
-  console.log(data);
   return (
     <ul data-testid='select-list'>
       {data?.getListNames && (

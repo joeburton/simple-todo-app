@@ -1,75 +1,83 @@
-import { getByTestId, render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import SelectMenu from './SelectMenu';
+import SelectMenu from "./SelectMenu";
 
 const renderSelectMenu = () => {
   return {
     ...render(
       <SelectMenu
         options={[
-          { value: 'default', label: 'Select List' },
-          { value: 'general', label: 'General' },
-          { value: 'tech', label: 'Tech' },
+          { value: "default", label: "Select List" },
+          { value: "general", label: "General" },
+          { value: "tech", label: "Tech" },
         ]}
         onChange={(value) => {}}
-        customStyles={{ minWidth: '200px', height: '38px' }}
+        customStyles={{ minWidth: "200px", height: "38px" }}
       />
     ),
   };
 };
 
-describe('SelectMenu', () => {
-  it('should render the SelectMenu and all options', () => {
-    const { getByTestId, getAllByRole } = renderSelectMenu();
-    expect(getByTestId('select-menu')).toBeDefined();
-    expect(getAllByRole('option').length).toEqual(3);
+describe("SelectMenu", () => {
+  it("should render the SelectMenu and all options", () => {
+    renderSelectMenu();
+    expect(screen.getByTestId("select-menu")).toBeDefined();
+    expect(screen.getAllByRole("option").length).toEqual(3);
   });
 
-  it('should have the default value selected', () => {
-    const { getByText } = renderSelectMenu();
+  it("should have the default value selected", () => {
+    renderSelectMenu();
 
     expect(
-      (getByText('Select List') as HTMLOptionElement).selected
+      (screen.getByText("Select List") as HTMLOptionElement).selected
     ).toBeTruthy();
-    expect((getByText('Select List') as HTMLOptionElement).value).toEqual(
-      'default'
-    );
+    expect(
+      (screen.getByText("Select List") as HTMLOptionElement).value
+    ).toEqual("default");
   });
 
-  it('should allow user to select a different option', () => {
-    const { getByText, getByRole, getByTestId } = renderSelectMenu();
+  it("should allow a user to select a different option from the select menu, attempt 1", () => {
+    renderSelectMenu();
     userEvent.selectOptions(
       // Find the select element
-      getByTestId('select-menu'),
+      screen.getByTestId("select-menu"),
       // Find and select the General option
-      getByRole('option', { name: 'General' })
+      screen.getByRole("option", { name: "General" })
     );
 
-    const selectMenu = getByRole('option', {
-      name: 'General',
+    const selectMenu = screen.getByRole("option", {
+      name: "General",
     }) as HTMLOptionElement;
 
     expect(selectMenu.selected).toBe(true);
-    expect((getByText('General') as HTMLOptionElement).selected).toBeTruthy();
-    expect((getByText('Tech') as HTMLOptionElement).selected).toBeFalsy();
+    expect(
+      (screen.getByText("General") as HTMLOptionElement).selected
+    ).toBeTruthy();
+    expect(
+      (screen.queryByText("Tech") as HTMLOptionElement).selected
+    ).toBeFalsy();
   });
 
-  it('should allow user to select a different option', () => {
-    const { getByText, getByRole, getByTestId } = renderSelectMenu();
+  it("should allow a user to select a different option from the select menu, attempt 2", () => {
+    renderSelectMenu();
     userEvent.selectOptions(
       // Find the select element
-      getByTestId('select-menu'),
+      screen.getByTestId("select-menu"),
       // Find and select the Tech option
-      getByRole('option', { name: 'Tech' })
+      screen.getByRole("option", { name: "Tech" })
     );
 
-    const selectMenu = getByRole('option', {
-      name: 'Tech',
+    const selectMenu = screen.getByRole("option", {
+      name: "Tech",
     }) as HTMLOptionElement;
     expect(selectMenu.selected).toBe(true);
 
-    expect((getByText('General') as HTMLOptionElement).selected).toBeFalsy();
-    expect((getByText('Tech') as HTMLOptionElement).selected).toBeTruthy();
+    expect(
+      (screen.queryByText("General") as HTMLOptionElement).selected
+    ).toBeFalsy();
+    expect(
+      (screen.getByText("Tech") as HTMLOptionElement).selected
+    ).toBeTruthy();
   });
 });

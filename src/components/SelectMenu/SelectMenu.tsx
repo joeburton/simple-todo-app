@@ -1,4 +1,4 @@
-import styles from './SelectMenu.module.css';
+import styles from "./SelectMenu.module.css";
 
 type OptionValue = string | number;
 
@@ -33,7 +33,7 @@ const SelectMenu = <T extends OptionValue>({
       style={customStyles}
       data-testid='select-menu'
       value={selectedOption}
-      aria-label='Please select a list'
+      aria-label='Please select an option from the list'
     >
       {options.map((option, index) => (
         <Option option={option} key={index} selectedOption={selectedOption} />

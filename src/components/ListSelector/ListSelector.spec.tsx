@@ -1,14 +1,14 @@
-import { ApolloProvider } from '@apollo/client';
-import { render } from '@testing-library/react';
-import apolloClient from '../../apollo/apolloClient';
+import { ApolloProvider } from "@apollo/client";
+import { render, screen } from "@testing-library/react";
+import apolloClient from "../../apollo/apolloClient";
 
-import { listNames } from '../../../mocks/data';
+import { listNames } from "../../../mocks/data";
 
-import ListSelector from './ListSelector';
+import ListSelector from "./ListSelector";
 
-describe('ListSelector', () => {
-  it('should render the SelectMenu and all options', () => {
-    const { getByTestId } = render(
+describe("ListSelector", () => {
+  it("should render the SelectMenu and all options", () => {
+    render(
       <ApolloProvider client={apolloClient}>
         <ListSelector
           setSelectedListName={(e) => {}}
@@ -17,6 +17,6 @@ describe('ListSelector', () => {
         />
       </ApolloProvider>
     );
-    expect(getByTestId('list-selector')).toBeDefined();
+    expect(screen.getByTestId("list-selector")).toBeDefined();
   });
 });

@@ -1,11 +1,11 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ModeStandbyIcon from "@mui/icons-material/ModeStandby";
 
-import { UPDATE_TODO, DELETE_TODO } from '../../apollo/mutations';
-import { Todo } from '../../interfaces';
-import { updateTodosCache, ACTIONS } from '../../apollo/updateCache';
-import styles from './TodoItem.module.css';
+import { DELETE_TODO, UPDATE_TODO } from "../../apollo/mutations";
+import { ACTIONS, updateTodosCache } from "../../apollo/updateCache";
+import { Todo } from "../../interfaces";
+import styles from "./TodoItem.module.css";
 
 interface TodoItemProps {
   todo: Todo;
@@ -36,10 +36,10 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const status = todo.complete ? `statusComplete` : `statusActive`;
 
   return (
-    <li data-testid='todo-item' className={loading ? 'loading' : ''}>
+    <li data-testid='todo-item' className={loading ? "loading" : ""}>
       <div className={styles.text} onClick={markComplete}>
         <ModeStandbyIcon
-          sx={{ fontSize: '1.2rem' }}
+          sx={{ fontSize: "1.2rem" }}
           className={styles[status]}
         />
         <span className={styles[complete]}>{todo.title}</span>
