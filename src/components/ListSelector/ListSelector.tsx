@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { SelectMenu } from '../SelectMenu';
-import styles from './ListSelector.module.css';
+import { useEffect, useState } from "react";
+import { SelectMenu } from "../SelectMenu";
+import styles from "./ListSelector.module.css";
 
 interface ListSelectorProps {
   setSelectedListName: (value: string) => void;
@@ -26,10 +26,10 @@ const ListSelector = ({
     );
 
     optionValues.unshift(
-      { value: 'default-view', label: 'Please Select' },
-      { value: 'manage-lists', label: 'Manage Lists' },
-      { value: 'view-all', label: 'View All Todos' },
-      { value: '#', label: '----Lists----' }
+      { value: "default-view", label: "Please Select" },
+      { value: "manage-lists", label: "Manage Lists" },
+      { value: "view-all", label: "View All Todos" },
+      { value: "#", label: "----Lists----" }
     );
 
     setOptionData(optionValues);
@@ -41,13 +41,13 @@ const ListSelector = ({
         <SelectMenu
           options={optonData}
           onChange={(value) => {
-            if (value === '#') {
+            if (value === "#") {
               return;
             }
             setSelectedListName(value);
           }}
           selectedOption={selectedOption}
-          customStyles={{ minWidth: '200px', height: '38px' }}
+          customStyles={{ minWidth: "200px", height: "38px" }}
         />
       )}
     </div>
