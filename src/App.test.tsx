@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import client from "./apollo/apolloClient";
 import App from "./App";
 
-test("should renders todo application", () => {
+test("should render the todo application", () => {
   render(
     <ApolloProvider client={client}>
       <App />
