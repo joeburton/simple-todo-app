@@ -31,7 +31,7 @@ switch (env) {
     graph = "http://localhost:4000/graphql";
     break;
   case "production":
-    graph = "https://apollo-3-mongoose-integration.vercel.app/graphql";
+    graph = "https://simple-todo-app-graphql.vercel.app/graphql";
     break;
 }
 
