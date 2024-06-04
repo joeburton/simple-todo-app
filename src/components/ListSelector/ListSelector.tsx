@@ -28,7 +28,7 @@ const ListSelector = ({
     optionValues.unshift(
       { value: "default-view", label: "Please Select" },
       { value: "manage-lists", label: "Manage Lists" },
-      { value: "view-all", label: "View All Todos" },
+      { value: "view-all", label: "View All Tasks" },
       { value: "#", label: "----Lists----" }
     );
 

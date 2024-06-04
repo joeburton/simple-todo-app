@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+
 import { useState } from "react";
 
 import styles from "./Todos.module.css";
@@ -17,7 +19,7 @@ const Todos = () => {
 
   const [selectedListName, setSelectedListName] =
     useState<string>("default-view");
-
+  console.log(selectedListName);
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateTodosCache(ACTIONS.ADD_TODO),
   });
@@ -42,7 +44,15 @@ const Todos = () => {
   if (error) return <>Error...</>;
 
   return (
-    <>
+    <Card
+      sx={{
+        bgcolor: "background.paper",
+        boxShadow: 2,
+        borderRadius: 2,
+        p: 2,
+        minWidth: 300,
+      }}
+    >
       <h1>Task Manager</h1>
       {dataListNames && (
         <ListSelector
@@ -56,9 +66,7 @@ const Todos = () => {
         <ManageLists dataListNames={dataListNames?.getListNames} />
       )}
 
-      {selectedListName === "default-view" && (
-        <h2>Create and manage simple todo lists.</h2>
-      )}
+      {selectedListName === "default-view" && <h2>Create and manage lists.</h2>}
 
       {selectedListName !== "manage-lists" &&
         selectedListName !== "default-view" && (
@@ -101,7 +109,7 @@ const Todos = () => {
             />
           </>
         )}
-    </>
+    </Card>
   );
 };
 
