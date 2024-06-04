@@ -1,10 +1,10 @@
-import './App.css';
+import "./App.css";
 
-import { Todos } from './components/';
+import { Todos } from "./components/";
 
 function App() {
   return (
-    <div className='simple-todo' data-testid='simple-todo-app'>
+    <div className='task-manager' data-testid='task-manager'>
       <Todos />
     </div>
   );

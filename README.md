@@ -1,4 +1,4 @@
-# Simple Todo App
+# Task Manager App
 
 ###Studio
 
