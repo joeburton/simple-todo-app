@@ -19,7 +19,7 @@ const Todos = () => {
 
   const [selectedListName, setSelectedListName] =
     useState<string>("default-view");
-  console.log(selectedListName);
+
   const [addTodo] = useMutation(ADD_TODO, {
     update: updateTodosCache(ACTIONS.ADD_TODO),
   });
