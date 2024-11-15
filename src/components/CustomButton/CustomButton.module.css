@@ -1,0 +1,8 @@
+.customButton {
+  background-color: white;
+  margin: 0 0 0 4px;
+  padding: 6px;
+  color: 'black';
+  border: 1px solid;
+  border-radius: 3px;
+}

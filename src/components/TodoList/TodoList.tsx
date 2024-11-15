@@ -1,6 +1,5 @@
 import { TodoItem } from '../';
 import { Todo } from '../../interfaces';
-import { Key } from 'react';
 
 import styles from './TodoList.module.css';
 
@@ -9,12 +8,15 @@ interface TodoListProps {
   todos: Todo[];
 }
 
-const TodoList = ({ filterFn, todos }: TodoListProps) => {
-  const sortedTodos = filterFn ? todos?.filter(filterFn) : todos;
+const TodoList = ({ filterFn = () => true, todos }: TodoListProps) => {
+  // Use the filter function directly in the filter method
+  const sortedTodos = todos.filter(filterFn);
+
   return (
     <ul className={styles.todosList}>
-      {sortedTodos.map((todo: Todo, i: Key | null | undefined) => (
-        <TodoItem key={i} todo={todo} />
+      {sortedTodos.map((todo) => (
+        // Assuming 'id' is a unique identifier in the Todo type
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );
